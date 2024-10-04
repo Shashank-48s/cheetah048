@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Edu+AU+VIC+WA+NT+Guides:wght@400..700&display=swap" rel="stylesheet">
+    <title>My Portfolio</title>
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: 	rgb(24,24,24);
+            color:white;
+        }
+
+        header {
+            background: linear-gradient(to bottom right, #0066ff, #990099);
+            color: #fff;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        section, header h1 {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+        }
+
+        /* Class to trigger the animation */
+        .show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background-color: #fff;
+            margin: 2px 0;
+        }
+
+        nav {
+            background-color: rgb(24,24,24); /* Background color for the navigation bar */
+            padding: 8px;
+            display: flex; /* Use flexbox for layout */
+            justify-content: space-around; /* Distribute links evenly */
+            flex-wrap: wrap; /* Allow wrapping for smaller screens */
+        }
+
+        nav a {
+            color: white; /* Text color */
+            text-decoration: none; /* Remove default underline */
+            padding: 10px 15px; /* Padding around the text */
+            position: relative; /* Position for the underline effect */
+            transition: color 0.3s ease; /* Transition for text color */
+        }
+
+        /* Underline effect using ::after */
+        nav a::after {
+            content: ""; /* Empty content for the underline */
+            display: block; /* Block display for the underline */
+            height: 2px; /* Height of the underline */
+            width: 0; /* Initial width of the underline */
+            background: white; /* Color of the underline */
+            transition: width 0.3s ease; /* Transition effect for width */
+            position: absolute; /* Positioning for the underline */
+            left: 50%; /* Center the underline */
+            bottom: -5px; /* Position below the text */
+            transform: translateX(-50%); /* Center align with the text */
+        }
+
+        /* Show the underline on hover */
+        nav a:hover::after {
+            width: 100%; /* Expand the underline to full width */
+        }
+
+        section {
+            padding: 2rem;
+            margin: 1rem 0;
+        }
+
+
+        h1, h2 {
+            margin-bottom: 1rem;
+        }
+        
+        #projects {
+    padding: 2rem; /* Add padding around the section */
+}
+
+#projects h2 {
+    font-size: 45px; /* Heading size */
+    text-align: center; /* Center the heading */
+    margin-bottom: 1.5rem; /* Space below the heading */
+}
+
+.project {
+    background: linear-gradient(135deg, #D8B5FF, #1EAE98); /* Gradient background */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+    padding: 1.5rem; /* Padding inside the boxes */
+    margin: 1rem 0; /* Margin for space between boxes */
+    color: black; /* Text color for contrast */
+    transition: transform 0.2s; /* Smooth hover effect */
+}
+
+.project:hover {
+    transform: scale(1.02); /* Slightly scale up on hover */
+}
+
+.project h3 {
+    font-size: 1.5rem; /* Title size */
+    font-weight: bold; /* Title weight */
+    margin-bottom: 0.5rem; /* Space below title */
+}
+
+.project p {
+    font-size: 1.0rem; /* Paragraph size */
+    font-weight: bold; /* Paragraph weight */
+}
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        input, textarea {
+            margin-bottom: 1rem;
+            padding: 0.5rem;
+        }
+
+        button {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease; /* Transition for button */
+        }
+
+        #about {
+            display: flex;
+            align-items: flex-start;
+            gap: 2rem;
+            transition: opacity 1s ease-in-out, transform 1s ease-in-out; /* Transition for flex-direction */
+        }
+
+        .about-content {
+            flex: 1;
+        }
+
+
+        #education {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    align-items: flex-start;
+    gap: 2rem; /* Space between the heading and education items */
+    transition: opacity 1s ease-in-out, transform 1s ease-in-out; /* Transition effects */
+}
+
+#education-list {
+    display: flex; /* Enable flexbox for the list */
+    flex-direction: column; /* Ensure boxes are stacked one after another */
+    gap: 1rem; /* Space between each education item */
+    width: 100%; /* Full width */
+}
+
+.education-item {
+    background: linear-gradient(135deg, #D8B5FF, #1EAE98); /* Gradient background */
+    padding: 1rem; /* Padding inside the boxes */
+    border-radius: 5px; /* Rounded corners */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+    width: 100%; /* Full width of parent */
+    color: black; /* Text color for contrast */
+}
+
+
+       .profile-pic {
+    width: 300px;
+    height: 350px;
+    margin-top: -200px;
+    border-radius: 50%;
+    object-fit: cover;
+    transition: margin-bottom 0.3s ease;
+    float: right; /* This will float the image to the right */
+}
+.social-buttons {
+    margin-top: 1rem;
+    display: flex;
+    gap: 1rem;
+}
+
+.social-buttons a {
+    color: #fff;
+    padding: 0.5rem;
+    font-size: 2rem;
+    display: flex; /* Corrected to use Flexbox */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+.social-buttons a.github {
+    width: 50px;
+    height: 50px;
+    background-color: black;
+    border-radius: 50%;
+    padding: 0.6rem;
+}
+
+.social-buttons a.linkedin {
+    width: 50px;
+    height: 50px;
+    background-color: #0077b5; /* LinkedIn's default color */
+    border-radius: 50%;
+    padding: 0.6rem;
+}
+
+.social-buttons a.download-cv {
+    background-color: black;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1rem;
+    text-align: center;
+}
+
+.social-buttons a:hover {
+    background-color: #555; /* Change background color on hover */
+}
+
+        .download-cv {
+            background-color: #4a4a4a;
+            color: #fff;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: background-color 0.3s ease; /* Transition for CV button */
+        }
+
+        /* Experience Section Styling */
+        #experience {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 2rem; /* Adds space between heading and boxes */
+            transition: opacity 1s ease-in-out, transform 1s ease-in-out; /* Transition for flex-direction */
+        }
+
+        #experience h2 {
+            width: 100%;
+            margin-bottom: 2rem; /* Adds space after the heading */
+        }
+
+        .experience-box {
+            background: linear-gradient(to right, #EE9CA7, #FFDDE1);
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 1.5rem;
+            flex: 1;
+            min-width: 250px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out; /* Transition for transform */
+        }
+
+        .experience-box:hover {
+            transform: translateY(-10px);
+        }
+
+        .experience-box h3 {
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .experience-box p {
+            font-size: 0.9rem;
+            color: #555;
+        }
+        .company-logo {
+    max-width: 400px; /* Adjust as necessary for size */
+    height: auto; /* Maintain aspect ratio */
+    margin-bottom: 1rem; /* Space below the logo */
+}
+
+.company-logo2 {
+    max-width: 200px; /* Adjust as necessary for size */
+    height: auto; /* Maintain aspect ratio */
+    margin-bottom: 1rem; /* Space below the logo */
+}
+
+.company-logo3 {
+    max-width: 200px; /* Adjust as necessary for size */
+    height: auto; /* Maintain aspect ratio */
+    margin-bottom: 1rem; /* Space below the logo */
+}
+
+#contact {
+    background-color: #f9f9f9; /* Light background for contrast */
+    padding: 2rem; /* Padding around the section */
+    border-radius: 10px; /* Rounded corners for the section */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    max-width: 400px; /* Adjust this value to set a smaller width */
+    margin: 2rem auto; /* Center the section with margin */
+    text-align: center; /* Center-align text */
+}
+
+
+#contact h2 {
+    font-size: 2rem; /* Heading size */
+    margin-bottom: 1.5rem; /* Space below the heading */
+    color: #1EAE98; /* Accent color for heading */
+}
+
+#contact-form {
+    display: flex; /* Flexbox for alignment */
+    flex-direction: column; /* Stack items vertically */
+    gap: 1rem; /* Space between inputs */
+}
+
+#contact-form input,
+#contact-form textarea {
+    padding: 1rem; /* Inner padding */
+    border: 1px solid #ccc; /* Light border */
+    border-radius: 5px; /* Rounded corners for inputs */
+    transition: border-color 0.3s; /* Smooth transition for focus effect */
+    width: 100%; /* Full width of the container */
+    font-size: 1rem; /* Consistent font size */
+    color: black; /* Set text color to black */
+}
+
+#contact-form input:focus,
+#contact-form textarea:focus {
+    border-color: #1EAE98; /* Change border color on focus */
+    outline: none; /* Remove default outline */
+}
+
+#contact-form button {
+    padding: 1rem; /* Inner padding for the button */
+    background-color: #1EAE98; /* Button background color */
+    color: white; /* Button text color */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Rounded corners for the button */
+    font-size: 1rem; /* Consistent font size */
+    cursor: pointer; /* Change cursor to pointer */
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+#contact-form button:hover {
+    background-color: #17a96e; /* Darken button on hover */
+}
+
+
+
+
+        @media (max-width: 768px) {
+    .hamburger {
+        display: flex; /* Show the hamburger menu */
+    }
+
+    nav {
+        flex-direction: column; /* Stack links vertically */
+        align-items: center; /* Center align links */
+        opacity: 0; /* Start hidden */
+        visibility: hidden; /* Ensure it does not take up space */
+        height: 0; /* Initial height for transition */
+        overflow: hidden; /* Hide overflow for smooth transition */
+        transition: opacity 0.3s ease, visibility 0.3s ease, height 0.3s ease; /* Transition for opacity and height */
+    }
+
+    nav.show {
+        opacity: 1; /* Show the menu */
+        visibility: visible; /* Make it visible */
+        height: auto; /* Set height to auto */
+    }
+
+    nav a {
+        padding: 10px; /* Adjust padding for smaller screens */
+        transition: padding 0.3s ease; /* Transition for padding */
+    }
+
+    #about {
+        display: flex; /* Ensure #about is a flex container */
+        flex-direction: column-reverse; /* Stack elements in reverse */
+        align-items: center;
+    }
+
+    #education {
+        display: flex; /* Ensure #about is a flex container */
+        flex-direction: column-reverse; /* Stack elements in reverse */
+        align-items: center;
+    }
+
+    .profile-pic {
+        float: none; /* Remove float */
+        margin: auto ; /* Add margin */
+        display: block; /* Ensure block display */
+        width: 200px; /* Set width */
+        height: 220px; /* Set height */
+    }
+
+    #experience {
+        display: flex; /* Ensure #experience is a flex container */
+        flex-direction: column; /* Stack children vertically */
+        align-items: center;
+        opacity: 0; /* Start hidden for the pop-up effect */
+        transform: translateY(20px); /* Initial position */
+        transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out; /* Transition for opacity and transform */
+    }
+
+    .experience-box {
+        opacity: 0; /* Start hidden for the pop-up effect */
+        transform: translateY(20px); /* Initial position */
+        transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out; /* Transition for opacity and transform */
+    }
+
+    .experience-box:hover {
+        transform: translateY(-10px); /* Hover effect */
+    }
+
+    #experience.show {
+        opacity: 1; /* Show the experience section */
+        transform: translateY(0); /* Reset position */
+    }
+
+    .experience-box.show {
+        opacity: 1; /* Show the experience box */
+        transform: translateY(0); /* Reset position */
+    }  
+
+    .project {
+        transition: transform 0.3s ease-in-out; /* Transition for transform */
+    }
+
+    .project:hover {
+        transform: translateY(-10px); /* Hover effect */
+    }
+}
+
+.company-logo {
+        max-width: 100%; /* Use 80% width on smaller screens */
+    }
+
+    .company-logo2,
+    .company-logo3 {
+        max-width: 50%; /* Use 80% width on smaller screens */
+    }
+
+    #contact {
+        width:80%;
+        padding: 1rem; /* Less padding on smaller screens */
+    }
+
+    #contact h2 {
+        font-size: 1.5rem; /* Smaller heading size */
+    }
+
+
+    </style>
+
+</head>
+<body>
+    <header>
+        <h1 style="font-size: 40px;">𝙒𝙚𝙡𝙘𝙤𝙢𝙚 𝙩𝙤 𝙢𝙮 𝙥𝙤𝙧𝙩𝙛𝙤𝙡𝙞𝙤 𝙬𝙚𝙗𝙨𝙞𝙩𝙚</h1>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </header>
+
+    <nav>
+        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+      <!-- Introductory Section with Name and Role -->
+      <section id="intro-section">
+        <div class="intro-content">
+            <p style="font-size: 24px;">𝗛𝗲𝗹𝗹𝗼❟ 𝗜'𝗺</p>
+        <h1 style="font-size: 40px;">​SHASHANK S</h1>
+            <h2 style="font-size: 45px";>𝑀𝒶𝒸𝒽𝒾𝓃𝑒 𝐿𝑒𝒶𝓇𝓃𝒾𝓃𝑔 𝒶𝓃𝒹 𝒜𝐼 𝑒𝓃𝑔𝒾𝓃𝑒𝑒𝓇 </h2>
+            <p>"Passionate about building intuitive web applications and exploring AI-driven technologies to deliver impactful solutions".</p>
+        </div>
+        
+        <div id="profile-info">
+            <img src="My pic.jpg" alt="Profile Picture" class="profile-pic">
+            <div class="social-buttons">
+                <a href="https://www.linkedin.com/in/shashank-s-92a0b8230/" class="linkedin" target="_blank">
+                    <i class="fa-brands fa-linkedin"></i>
+                </a>
+                <a href="https://github.com/Shashank-48s" class="github" target="_blank">
+                    <i class="fa-brands fa-github"></i>
+                </a>
+                <a href="Shashank S Resume.pdf" class="download-cv" download>Download CV</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Moved About Me Section -->
+    <section id="about">
+        <div class="about-content">
+            <h2 style="font-size: 40px;">ABOUT ME​</h2>
+            <p style="font-size: 25px;">Motivated engineering student with a strong drive to enhance skills, gain valuable insights from industry experts, and make a meaningful impact on projects within the technology sector. Committed to continuous learning and staying up-to-date with the latest advancements. Eager to apply knowledge and contribute to innovative solutions.</p>
+        </div>
+    </section>
+    
+    <section id="education">
+        <div id="education-list">
+            <h2 style="font-size: 40px;">​EDUCATION​</h2>
+            <div class="education-item">
+                <h3 style="font-size: 1.5rem; font-weight: bold;">Bachelor of Engineering in Information Science & Engineering</h3>
+                <p style="font-size: 1.0rem; font-weight: bold;">HKBK College of Engineering | CGPA: 7.3 | 2023-Present</p>
+            </div>
+            
+            <div class="education-item">
+                <h3 style="font-size: 1.5rem; font-weight: bold;">Diploma in Tool and Die Making</h3>
+                <p style="font-size: 1.0rem; font-weight: bold;">Goverment Tool room and training center | Percentage: 70% | 2019-2022 </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience">
+        <h2 style="font-size: 40px";>​EXPERIENCE</h2>
+        <div class="experience-box">
+            <img src="karunadu.jpg" alt="Company Logo" class="company-logo">
+            <h3 style="font-size: 1.5rem; font-weight: bold;">Karunadu Technologies Private Limited</h3>
+            <p style="font-size: 1.0rem; font-weight: bold;">Oct, 2023-Nov, 2023</p>
+            <p style="font-size: 1.0rem; font-weight: bold;">Implemented a machine learning project in Django, demonstrating knowledge in data processing, predictive modeling, 
+                and application development. </p>
+        </div>
+        <div class="experience-box">
+            <img src="Simplilearn_Logo.jpg" alt="Company Logo " class="company-logo2">
+            <h3 style="font-size: 1.5rem; font-weight: bold;">Simpli Learn</h3>
+            <p style="font-size: 1.0rem; font-weight: bold;">Sep, 2024-Sep, 2024</p>
+            <p style="font-size: 1.0rem; font-weight: bold;">Developed client websites and supported team in building robust digital solutions.</p>
+        </div>
+        <div class="experience-box">
+            <img src="TAFE_CTW.jpg" alt="Company Logo " class="company-logo2">
+            <h3 style="font-size: 1.5rem; font-weight: bold;">TAFE, Tractors and Farm Equipment’s Limited</h3>
+            <p style="font-size: 1.0rem; font-weight: bold;">Jan, 2022-Sep, 2022</p>
+            <p style="font-size: 1.0rem; font-weight: bold;">Completed 9 Months implant training as CNC Operator in (TAFE) Tractors and Farm Equipment’s limited, 
+                focusing on precision machining and tool management.</p>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <h2 style="font-size: 40px";>​PROJECTS</h2>
+        <div class="project">
+            <h3 style="font-size: 1.5rem; font-weight: bold;">​DIABETES PREDICTION MODEL</h3>
+            <p style="font-size: 1.0rem; font-weight: bold;">I developed a Diabetes Prediction Model utilizing the Decision Tree algorithm in Python, integrated with Django for the web interface. The model analyzes various health indicators such as glucose levels, BMI, and age to predict the likelihood of diabetes. The Decision Tree algorithm was selected for its interpretability, allowing users to understand the decision-making process. I preprocessed the data to handle missing values and outliers, ensuring reliable predictions. The Django framework provided a seamless platform for deploying the model with a user-friendly interface for real-time predictions.</p>
+        </div>
+        <div class="project">
+            <h3 style="font-size: 1.5rem; font-weight: bold;">ZOMATO FRONT PAGE CLONE</h3>
+            <p style="font-size: 1.0rem; font-weight: bold;">I developed a responsive front page clone of Zomato using HTML, CSS, and JavaScript. The project features a clean and modern layout, showcasing dynamic content like restaurant listings, search functionality, and user reviews. CSS was used for styling and creating visually appealing elements, while JavaScript was utilized to implement interactive features such as the location-based restaurant search. The page is fully responsive, adapting seamlessly to both desktop and mobile devices. Additionally, I focused on optimizing the page for faster loading times and enhanced user experience. This project demonstrates my skills in front-end web development and UI design.</p>
+        </div>
+        <div class="project">
+            <h3 style="font-size: 1.5rem; font-weight: bold;"​>EVENT MANAGEMENT SYSTEM​</h3>
+            <p style="font-size: 1.0rem; font-weight: bold;">I created a full-fledged event management system using Django, focusing on seamless event registration, management, and user interaction. The platform allows users to create, manage, and attend events with an intuitive and user-friendly interface. Django's robust backend architecture handles user authentication, event scheduling, and database interactions efficiently. With dynamic forms and automated email notifications, the system provides real-time updates to users. The project integrates responsive design to ensure compatibility across devices, offering a smooth experience on both desktop and mobile platforms. This showcases my proficiency in Django and full-stack web development.</p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2>Contact Me</h2>
+        <form id="contact-form">
+            <input type="text" placeholder="Name" required>
+            <input type="email" placeholder="Email" required>
+            <textarea placeholder="Message" required></textarea>
+            <button type="submit">Send</button>
+        </form>
+    </section>
+
+    <script>
+      // Contact form submission
+document.getElementById('contact-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    alert('Thank you for your message! I will get back to you soon.');
+    this.reset();
+});
+
+// Smooth scrolling for navigation links
+document.querySelectorAll('nav a').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth'
+        });
+    });
+});
+
+// Animate heading and sections on page load
+document.addEventListener('DOMContentLoaded', () => {
+    const portfolioHeading = document.querySelector('header h1');
+    const sections = document.querySelectorAll('section');
+    
+    // Display the portfolio heading first
+    setTimeout(() => {
+        portfolioHeading.classList.add('show');
+    }, 200); // Adjust this delay if needed
+
+    // Display sections one by one after the heading
+    sections.forEach((section, index) => {
+        setTimeout(() => {
+            section.classList.add('show');
+        }, 1200 + (index * 600)); // Delay each section based on the index
+    });
+
+    // Trigger the scroll event for experience section visibility
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Check visibility on load
+});
+
+// Hamburger menu functionality
+const hamburger = document.querySelector('.hamburger');
+const nav = document.querySelector('nav');
+
+hamburger.addEventListener('click', () => {
+    nav.classList.toggle('show');
+});
+
+// Close menu when a link is clicked
+document.querySelectorAll('nav a').forEach(link => {
+    link.addEventListener('click', () => {
+        nav.classList.remove('show');
+    });
+});
+
+// Function to handle scroll event for experience section
+function handleScroll() {
+    const experienceSection = document.getElementById('experience');
+    const experienceBoxes = document.querySelectorAll('.experience-box');
+
+    const sectionPosition = experienceSection.getBoundingClientRect().top;
+    const screenPosition = window.innerHeight / 1.5; // Trigger when the section is in view
+
+    if (sectionPosition < screenPosition) {
+        experienceSection.classList.add('show'); // Show the section
+        experienceBoxes.forEach(box => {
+            box.classList.add('show'); // Show each box
+        });
+    }
+}
+
+    </script>
+</body>
+</html>
